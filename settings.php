@@ -21,5 +21,7 @@
  * @copyright  2019 Paulo Jr
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+defined('MOODLE_INTERNAL') || die;
+
 $ADMIN->add('reports', new admin_externalpage('reportolamundo', get_string('pluginname', 'report_olamundo'), "$CFG->wwwroot/report/olamundo/index.php"));
 $settings = null;

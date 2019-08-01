@@ -14,12 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * Strings for component 'report_olamundo', language 'pt_br'
+ * Strings for component, language 'pt_br'
  *
  * @package    report
- * @subpackage olamundo
  * @copyright  2019 Paulo Jr
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-$string['pluginname'] = 'Olá Mundo';
-$string['heading'] = 'Meu primeiro plugin';
+$string['pluginname'] = 'Olá mundo';
+$string['heading'] = 'Este é o meu primeiro plugin';

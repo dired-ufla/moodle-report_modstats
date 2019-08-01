@@ -14,18 +14,18 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * olamundo report
+ * Report main page
  *
  * @package    report
- * @subpackage olamundo
  * @copyright  2019 Paulo Jr
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 require(__DIR__.'/../../config.php');
+require(__DIR__.'/util/constants.php');
 require_once($CFG->libdir.'/adminlib.php');
 
-admin_externalpage_setup('reportconfiglog', '', null, '', array('pagelayout'=>'report'));
+admin_externalpage_setup(COMPONENT_NAME_WITHOUT_UNDERSCORE, '', null, '', array('pagelayout'=>'report'));
 
 echo $OUTPUT->header();
-echo $OUTPUT->heading(get_string('heading', 'report_olamundo'));
+echo $OUTPUT->heading(get_string('pluginname',  COMPONENT_NAME));
 echo $OUTPUT->footer();

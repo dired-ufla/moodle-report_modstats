@@ -17,11 +17,12 @@
  * Report settings
  *
  * @package    report
- * @subpackage olamundo
  * @copyright  2019 Paulo Jr
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 defined('MOODLE_INTERNAL') || die;
 
-$ADMIN->add('reports', new admin_externalpage('reportolamundo', get_string('pluginname', 'report_olamundo'), "$CFG->wwwroot/report/olamundo/index.php"));
+require(__DIR__.'/util/constants.php');
+
+$ADMIN->add('reports', new admin_externalpage(COMPONENT_NAME_WITHOUT_UNDERSCORE, get_string('pluginname', COMPONENT_NAME), "$CFG->wwwroot/report/". FOLDER_NAME . "/index.php"));
 $settings = null;

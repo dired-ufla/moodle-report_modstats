@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * Version details
+ * Constants for component
  *
  * @package    report
  * @copyright  2019 Paulo Jr
@@ -22,8 +22,6 @@
  */
 defined('MOODLE_INTERNAL') || die;
 
-require(__DIR__.'/util/constants.php');
-
-$plugin->version   = 2019080100;         // The current plugin version (Date: YYYYMMDDXX)
-$plugin->requires  = 2015051100;         // Requires this Moodle version (see https://docs.moodle.org/dev/Releases)
-$plugin->component = COMPONENT_NAME;  // Full name of the plugin
+define('COMPONENT_NAME', 'report_olamundo'); 
+define('COMPONENT_NAME_WITHOUT_UNDERSCORE', 'reportolamundo'); 
+define('FOLDER_NAME', 'olamundo');

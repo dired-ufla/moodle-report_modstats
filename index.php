@@ -24,8 +24,8 @@ require(__DIR__.'/../../config.php');
 require(__DIR__.'/util/constants.php');
 require_once($CFG->libdir.'/adminlib.php');
 
-admin_externalpage_setup(COMPONENT_NAME_WITHOUT_UNDERSCORE, '', null, '', array('pagelayout'=>'report'));
+admin_externalpage_setup('reportolamundo', '', null, '', array('pagelayout'=>'report'));
 
 echo $OUTPUT->header();
-echo $OUTPUT->heading(get_string('pluginname',  COMPONENT_NAME));
+echo $OUTPUT->heading(get_string('pluginname',  'report_olamundo'));
 echo $OUTPUT->footer();

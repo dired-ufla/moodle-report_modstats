@@ -24,5 +24,5 @@ defined('MOODLE_INTERNAL') || die;
 
 require(__DIR__.'/util/constants.php');
 
-$ADMIN->add('reports', new admin_externalpage(COMPONENT_NAME_WITHOUT_UNDERSCORE, get_string('pluginname', COMPONENT_NAME), "$CFG->wwwroot/report/". FOLDER_NAME . "/index.php"));
+$ADMIN->add('reports', new admin_externalpage('reportolamundo', get_string('pluginname', 'report_olamundo'), "$CFG->wwwroot/report/olamundo/index.php"));
 $settings = null;

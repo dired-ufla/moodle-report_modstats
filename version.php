@@ -22,8 +22,6 @@
  */
 defined('MOODLE_INTERNAL') || die;
 
-require(__DIR__.'/util/constants.php');
-
 $plugin->version   = 2019080100;         // The current plugin version (Date: YYYYMMDDXX)
 $plugin->requires  = 2015051100;         // Requires this Moodle version (see https://docs.moodle.org/dev/Releases)
-$plugin->component = COMPONENT_NAME;  // Full name of the plugin
+$plugin->component = 'report_olamundo';  // Full name of the plugin

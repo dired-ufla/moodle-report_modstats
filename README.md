@@ -3,7 +3,7 @@ In our institution (Federal University of Lavras, Lavras, Brazil - in portuguese
 
 We believe that the knowledge about the modules usage is important because this may improve the strategies of training and information dissimination about the resources available in Moodle. However, gathering the statistics of modules usage is not a trivial task, mainly when this is performed in a manual way; the last time we did that, it tooks us 16 hours of our precious time ;)
 
-Hence, we developed "Modules Usage Statistics"; this is a Moodle report plugin that helps the admin to known how the modules are being used by users (e.g. as forum, as file repositories or as activities repositories). Feel free to use and contribute to this project by improving the plugin functionality or letting us to know about possible bugs existing in its code. You can see some screenshots at https://moodle.org/plugins/report_coursestats.
+Hence, we developed "Modules Usage Statistics"; this is a Moodle report plugin that helps the admin to known how the modules are being used by users (e.g. as forum, as file repositories or as activities repositories). Feel free to use and contribute to this project by improving the plugin functionality or letting us to know about possible bugs existing in its code. 
 
 ## Releases
 

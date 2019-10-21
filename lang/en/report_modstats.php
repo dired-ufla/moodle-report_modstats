@@ -21,3 +21,9 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 $string['pluginname'] = 'Module Usage Statistics';
+$string['lb_choose_category'] = 'Please, choose a category';
+$string['lb_choose_module'] = 'Please, choose a module';
+$string['lb_all_categories'] = 'All categories';
+$string['lb_course'] = 'Course';
+$string['btn_refresh'] = 'Refresh';
+$string['btn_back'] = 'Back';

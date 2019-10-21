@@ -25,6 +25,25 @@ require_once($CFG->libdir.'/adminlib.php');
 
 admin_externalpage_setup('reportmodstats', '', null, '', array('pagelayout'=>'report'));
 
+const ALL_CATEGORIES = -1;
+
 echo $OUTPUT->header();
-echo $OUTPUT->heading(get_string('pluginname',  'report_modstats'));
+
+$result = $DB->get_records('course_categories', null, 'name');
+		
+$table = new html_table();
+
+$row = array();
+$row[] = '<a href=' . $CFG->wwwroot . '/report/modstats/modusage.php?category=' . ALL_CATEGORIES . '>' . get_string('lb_all_categories', 'report_modstats') . '</a>';
+$table->data[] = $row;
+
+$table->head = array(	get_string('lb_choose_category', 'report_modstats'));
+foreach ($result as $cs) {
+    $row = array();
+    $row[] = '<a href=' . $CFG->wwwroot . '/report/modstats/modusage.php?category=' . $cs->id . '>' . $cs->name . '</a>';
+	$table->data[] = $row;
+}
+
+echo html_writer::table($table);
+
 echo $OUTPUT->footer();

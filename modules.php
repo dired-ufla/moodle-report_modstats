@@ -14,16 +14,23 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 /**
- * Strings for component, language 'pt_br'
+ * Report main page
  *
  * @package    report
  * @copyright  2019 Paulo Jr
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-$string['pluginname'] = 'Estatísticas de uso de módulos';
-$string['lb_choose_category'] = 'Por favor, escolha uma categoria';
-$string['lb_choose_module'] = 'Por favor, escolha um módulo';
-$string['lb_all_categories'] = 'Todas categorias';
-$string['lb_course'] = 'Curso';
-$string['btn_refresh'] = 'Atualizar';
-$string['btn_back'] = 'Voltar';
+require_once $CFG->libdir . '/formslib.php';
+
+class modules_form extends moodleform {
+    public function definition() {
+        global $DB;
+
+        $mform = $this->_form; // Don't forget the underscore! 
+
+        $modules = $DB->get_records_menu('modules', null, 'name');
+        
+        $mform->addElement('select', 'module', get_string('lb_choose_module', 'report_modstats'), $modules);
+        $this->add_action_buttons(false, get_string('btn_refresh', 'report_modstats'));
+    }
+}

@@ -34,10 +34,17 @@ $category = optional_param('category', NO_DEFINED, PARAM_INT);
 
 if ($category != NO_DEFINED) {
   $SESSION->category = $category;
+  if ($category != ALL_CATEGORIES) {
+    $cat = $DB->get_record('course_categories', array("id" => $category));
+    $SESSION->catname = $cat->name;
+  } else {
+    $SESSION->catname = get_string('lb_all_categories', 'report_modstats');
+  }
 }
 
 echo $OUTPUT->header();
 echo $OUTPUT->heading(
+  $SESSION->catname . ' - ' . 
     html_writer::link(
       $CFG->wwwroot . '/report/modstats/index.php', 
       get_string('btn_back', 'report_modstats')

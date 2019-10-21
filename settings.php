@@ -22,5 +22,5 @@
  */
 defined('MOODLE_INTERNAL') || die;
 
-$ADMIN->add('reports', new admin_externalpage('reportolamundo', get_string('pluginname', 'report_olamundo'), "$CFG->wwwroot/report/olamundo/index.php"));
+$ADMIN->add('reports', new admin_externalpage('reportmodstats', get_string('pluginname', 'report_modstats'), "$CFG->wwwroot/report/modstats/index.php"));
 $settings = null;

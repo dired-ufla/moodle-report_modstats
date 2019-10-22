@@ -47,7 +47,7 @@ echo $OUTPUT->heading(
   $SESSION->catname . ' - ' . 
     html_writer::link(
       $CFG->wwwroot . '/report/modstats/index.php', 
-      get_string('btn_back', 'report_modstats')
+      get_string('link_back', 'report_modstats')
     )
 );
 

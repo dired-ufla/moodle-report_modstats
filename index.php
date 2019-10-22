@@ -32,16 +32,20 @@ echo $OUTPUT->header();
 $result = $DB->get_records('course_categories', null, 'name');
 		
 $table = new html_table();
+$table->size = array( '80%', '20%');
 
 $row = array();
 $row[] = '<a href=' . $CFG->wwwroot . '/report/modstats/modusage.php?category=' . ALL_CATEGORIES . '>' . get_string('lb_all_categories', 'report_modstats') . '</a>';
+$row[] = '<a href=' . $CFG->wwwroot . '/report/modstats/summary.php?category=' . ALL_CATEGORIES . '>' . get_string('link_summary', 'report_modstats') . '</a>';
 $table->data[] = $row;
 
 $table->head = array(	get_string('lb_choose_category', 'report_modstats'));
 foreach ($result as $cs) {
     $row = array();
     $row[] = '<a href=' . $CFG->wwwroot . '/report/modstats/modusage.php?category=' . $cs->id . '>' . $cs->name . '</a>';
-	$table->data[] = $row;
+    $row[] = '<a href=' . $CFG->wwwroot . '/report/modstats/summary.php?category=' . $cs->id . '>' . get_string('link_summary', 'report_modstats') . '</a>';
+    
+    $table->data[] = $row;
 }
 
 echo html_writer::table($table);

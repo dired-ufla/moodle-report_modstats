@@ -7,4 +7,5 @@ Hence, we developed "Modules Usage Statistics"; this is a Moodle report plugin t
 
 ## Releases
 
+- v2.0: this version presents modules usage statistics in a graphical way.
 - v1.0: this is the first version of the plugin.

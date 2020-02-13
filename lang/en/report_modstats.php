@@ -22,10 +22,11 @@
  */
 $string['pluginname'] = 'Module Usage Statistics';
 $string['lb_choose_category'] = 'Please, choose a category';
-$string['lb_choose_module'] = 'Please, choose a module';
+$string['lb_module_name'] = 'Module';
+$string['lb_module_usage'] = 'Usage (%)';
 $string['lb_all_categories'] = 'All categories';
-$string['lb_course'] = 'Course';
+$string['lb_course'] = 'Courses using the module: ';
 $string['lb_chart_serie'] = 'Modules usage statistics';
 $string['btn_refresh'] = 'Refresh';
 $string['link_back'] = 'Back';
-$string['link_summary'] = 'Summary';
+$string['link_summary'] = 'View courses';

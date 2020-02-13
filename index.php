@@ -17,37 +17,83 @@
  * Report main page
  *
  * @package    report
- * @copyright  2019 Paulo Jr
+ * @copyright  2020 Paulo Jr
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require(__DIR__.'/../../config.php');
-require_once($CFG->libdir.'/adminlib.php');
+require __DIR__ . '/../../config.php';
+require_once $CFG->libdir . '/adminlib.php';
+require_once __DIR__ . '/categories.php';
 
-admin_externalpage_setup('reportmodstats', '', null, '', array('pagelayout'=>'report'));
+admin_externalpage_setup('reportmodstats', '', null, '', array('pagelayout' => 'report'));
 
 const ALL_CATEGORIES = -1;
 
+$category = optional_param('category', ALL_CATEGORIES, PARAM_INT);
+
 echo $OUTPUT->header();
 
-$result = $DB->get_records('course_categories', null, 'name');
-		
-$table = new html_table();
-$table->size = array( '80%', '20%');
+$mform = new categories_form();
+$mform->display();
 
-$row = array();
-$row[] = '<a href=' . $CFG->wwwroot . '/report/modstats/modusage.php?category=' . ALL_CATEGORIES . '>' . get_string('lb_all_categories', 'report_modstats') . '</a>';
-$row[] = '<a href=' . $CFG->wwwroot . '/report/modstats/summary.php?category=' . ALL_CATEGORIES . '>' . get_string('link_summary', 'report_modstats') . '</a>';
-$table->data[] = $row;
-
-$table->head = array(	get_string('lb_choose_category', 'report_modstats'));
-foreach ($result as $cs) {
-    $row = array();
-    $row[] = '<a href=' . $CFG->wwwroot . '/report/modstats/modusage.php?category=' . $cs->id . '>' . $cs->name . '</a>';
-    $row[] = '<a href=' . $CFG->wwwroot . '/report/modstats/summary.php?category=' . $cs->id . '>' . get_string('link_summary', 'report_modstats') . '</a>';
-    
-    $table->data[] = $row;
+if ($category == ALL_CATEGORIES) {
+    $data = $DB->get_records_sql(
+        'SELECT M.name, M.id, COUNT(CM.id) as amount FROM {modules} as M INNER JOIN {course_modules} as CM INNER JOIN {course} as C ON M.id = CM.module AND C.id = CM.course WHERE C.visible = 1 GROUP BY M.name'
+    );
+    $total = $DB->count_records_sql(
+        'SELECT COUNT(CM.id) FROM {course} as C INNER JOIN {course_modules} as CM ON C.id = CM.course WHERE C.visible = 1'
+    );
+} else {  
+    $data = $DB->get_records_sql(
+        'SELECT M.name, M.id, COUNT(CM.id) as amount FROM {modules} as M INNER JOIN {course_modules} as CM INNER JOIN {course} as C ON M.id = CM.module AND C.id = CM.course WHERE C.visible = 1 AND C.category = :cat GROUP BY M.name',
+        array("cat" => $category)
+    );
+    $total = $DB->count_records_sql(
+        'SELECT COUNT(CM.id) FROM {course} as C INNER JOIN {course_modules} as CM ON C.id = CM.course WHERE C.visible = 1 AND C.category = :cat',
+        array("cat" => $category)
+    ); 
 }
 
-echo html_writer::table($table);
+if ($total > 0) {
+
+    $table = new html_table();
+    $table->size = array( '60%', '20%', '20%');
+    $table->head = array(get_string('lb_module_name', 'report_modstats'), 
+        get_string('lb_module_usage', 'report_modstats'), 
+        "");
+
+    $chart_labels = array();
+    $chart_values = array();
+
+    $index = 1;
+
+    foreach ($data as $item) {
+        $row = array();
+
+        $percent = number_format(($item->amount / $total) * 100, 2);
+
+        $chart_labels[] = $index; 
+        $chart_values[] = $percent;
+
+        $row[] = $index . " - " . get_string('pluginname', 'mod_' . $item->name);
+        $row[] = $percent;
+        $row[] = '<a href=' . $CFG->wwwroot . '/report/modstats/modusage.php?category=' . $category . '&module=' . $item->id . '>' . get_string('link_summary', 'report_modstats') . '</a>';
+    
+        $index = $index + 1;
+
+        $table->data[] = $row;
+    }
+
+    if (class_exists('core\chart_bar')) {
+        $chart = new core\chart_bar();
+        $serie = new core\chart_series(
+            get_string('lb_chart_serie', 'report_modstats'), $chart_values
+        );
+        $chart->add_series($serie);
+        $chart->set_labels($chart_labels);
+        echo $OUTPUT->render_chart($chart, false);
+    }
+
+    echo html_writer::table($table);
+}
 
 echo $OUTPUT->footer();

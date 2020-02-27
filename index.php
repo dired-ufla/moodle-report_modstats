@@ -22,33 +22,32 @@
  */
 require __DIR__ . '/../../config.php';
 require_once $CFG->libdir . '/adminlib.php';
-require_once __DIR__ . '/categories.php';
+require_once __DIR__ . '/report_modstats_categories_form.php';
+require_once __DIR__ . '/constants.php';
 
 admin_externalpage_setup('reportmodstats', '', null, '', array('pagelayout' => 'report'));
 
-const ALL_CATEGORIES = -1;
-
-$category = optional_param('category', ALL_CATEGORIES, PARAM_INT);
+$category = optional_param('category', REPORT_MODSTATS_ALL_CATEGORIES, PARAM_INT);
 
 echo $OUTPUT->header();
 
-$mform = new categories_form();
+$mform = new report_modstats_categories_form();
 $mform->display();
 
-if ($category == ALL_CATEGORIES) {
+if ($category == REPORT_MODSTATS_ALL_CATEGORIES) {
     $data = $DB->get_records_sql(
-        'SELECT M.name, M.id, COUNT(CM.id) as amount FROM {modules} as M INNER JOIN {course_modules} as CM INNER JOIN {course} as C ON M.id = CM.module AND C.id = CM.course WHERE C.visible = 1 GROUP BY M.name'
+        'SELECT M.name, M.id, COUNT(CM.id) AS amount FROM {modules} AS M INNER JOIN {course_modules} AS CM INNER JOIN {course} AS C ON M.id = CM.module AND C.id = CM.course WHERE C.visible = 1 GROUP BY M.name, M.id'
     );
     $total = $DB->count_records_sql(
-        'SELECT COUNT(CM.id) FROM {course} as C INNER JOIN {course_modules} as CM ON C.id = CM.course WHERE C.visible = 1'
+        'SELECT COUNT(CM.id) FROM {course} AS C INNER JOIN {course_modules} AS CM ON C.id = CM.course WHERE C.visible = 1'
     );
 } else {  
     $data = $DB->get_records_sql(
-        'SELECT M.name, M.id, COUNT(CM.id) as amount FROM {modules} as M INNER JOIN {course_modules} as CM INNER JOIN {course} as C ON M.id = CM.module AND C.id = CM.course WHERE C.visible = 1 AND C.category = :cat GROUP BY M.name',
+        'SELECT M.name, M.id, COUNT(CM.id) AS amount FROM {modules} AS M INNER JOIN {course_modules} AS CM INNER JOIN {course} AS C ON M.id = CM.module AND C.id = CM.course WHERE C.visible = 1 AND C.category = :cat GROUP BY M.name, M.id',
         array("cat" => $category)
     );
     $total = $DB->count_records_sql(
-        'SELECT COUNT(CM.id) FROM {course} as C INNER JOIN {course_modules} as CM ON C.id = CM.course WHERE C.visible = 1 AND C.category = :cat',
+        'SELECT COUNT(CM.id) FROM {course} AS C INNER JOIN {course_modules} AS CM ON C.id = CM.course WHERE C.visible = 1 AND C.category = :cat',
         array("cat" => $category)
     ); 
 }

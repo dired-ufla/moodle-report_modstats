@@ -20,24 +20,4 @@
  * @copyright  2020 Paulo Jr
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require_once $CFG->libdir . '/formslib.php';
-
-class categories_form extends moodleform {
-    public function definition() {
-        global $DB;
-
-        $mform = $this->_form; // Don't forget the underscore! 
-
-        $categories = $DB->get_records('course_categories', null, 'name');
-        $cat_names = array();
-
-        $cat_names[ALL_CATEGORIES] = get_string('lb_all_categories', 'report_modstats');
-
-        foreach ($categories as $item) {
-            $cat_names[$item->id] = $item->name;
-        }
-
-        $mform->addElement('select', 'category', get_string('lb_choose_category', 'report_modstats'), $cat_names);
-        $this->add_action_buttons(false, get_string('btn_refresh', 'report_modstats'));
-    }
-}
+define('REPORT_MODSTATS_ALL_CATEGORIES', -1);

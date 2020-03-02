@@ -36,14 +36,14 @@ $mform->display();
 
 if ($category == REPORT_MODSTATS_ALL_CATEGORIES) {
     $data = $DB->get_records_sql(
-        'SELECT M.name, M.id, COUNT(CM.id) AS amount FROM {modules} AS M INNER JOIN {course_modules} AS CM INNER JOIN {course} AS C ON M.id = CM.module AND C.id = CM.course WHERE C.visible = 1 GROUP BY M.name, M.id'
+        'SELECT M.name, M.id, COUNT(CM.id) AS amount FROM {modules} AS M INNER JOIN {course_modules} AS CM ON M.id = CM.module INNER JOIN {course} AS C ON C.id = CM.course WHERE C.visible = 1 GROUP BY M.name, M.id'
     );
     $total = $DB->count_records_sql(
         'SELECT COUNT(CM.id) FROM {course} AS C INNER JOIN {course_modules} AS CM ON C.id = CM.course WHERE C.visible = 1'
     );
 } else {  
     $data = $DB->get_records_sql(
-        'SELECT M.name, M.id, COUNT(CM.id) AS amount FROM {modules} AS M INNER JOIN {course_modules} AS CM INNER JOIN {course} AS C ON M.id = CM.module AND C.id = CM.course WHERE C.visible = 1 AND C.category = :cat GROUP BY M.name, M.id',
+        'SELECT M.name, M.id, COUNT(CM.id) AS amount FROM {modules} AS M INNER JOIN {course_modules} AS CM ON M.id = CM.module INNER JOIN {course} AS C ON C.id = CM.course WHERE C.visible = 1 AND C.category = :cat GROUP BY M.name, M.id',
         array("cat" => $category)
     );
     $total = $DB->count_records_sql(

@@ -22,7 +22,7 @@
  */
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version   = 2020022703;         // The current plugin version (Date: YYYYMMDDXX)
+$plugin->version   = 2020022704;         // The current plugin version (Date: YYYYMMDDXX)
 $plugin->requires  = 2015051100;         // Requires this Moodle version (see https://docs.moodle.org/dev/Releases)
 $plugin->component = 'report_modstats';  // Full name of the plugin
 $plugin->maturity  = MATURITY_STABLE;         // Requires this Moodle version (see https://docs.moodle.org/dev/Releases)

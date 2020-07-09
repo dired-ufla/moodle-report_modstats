@@ -56,7 +56,7 @@ if ($total > 0) {
 
     $table = new html_table();
     $table->size = array( '40%', '20%', '20%', '20%');
-    $table->head = array(get_string('lb_module_name', 'report_modstats'), get_string('lb_module_courses_amount', 'report_modstats'),
+    $table->head = array(get_string('lb_module_name', 'report_modstats'), get_string('lb_module_amount', 'report_modstats'),
         get_string('lb_module_usage', 'report_modstats'), 
         "");
 

@@ -55,8 +55,8 @@ if ($category == REPORT_MODSTATS_ALL_CATEGORIES) {
 if ($total > 0) {
 
     $table = new html_table();
-    $table->size = array( '60%', '20%', '20%');
-    $table->head = array(get_string('lb_module_name', 'report_modstats'), 
+    $table->size = array( '40%', '20%', '20%', '20%');
+    $table->head = array(get_string('lb_module_name', 'report_modstats'), get_string('lb_module_courses_amount', 'report_modstats'),
         get_string('lb_module_usage', 'report_modstats'), 
         "");
 
@@ -74,6 +74,7 @@ if ($total > 0) {
         $chart_values[] = $percent;
 
         $row[] = $index . " - " . get_string('pluginname', 'mod_' . $item->name);
+        $row[] = $item->amount;
         $row[] = $percent;
         $row[] = '<a href=' . $CFG->wwwroot . '/report/modstats/modusage.php?category=' . $category . '&module=' . $item->id . '>' . get_string('link_summary', 'report_modstats') . '</a>';
     

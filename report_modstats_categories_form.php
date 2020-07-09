@@ -35,7 +35,15 @@ class report_modstats_categories_form extends moodleform {
         $cat_names[REPORT_MODSTATS_ALL_CATEGORIES] = get_string('lb_all_categories', 'report_modstats');
 
         foreach ($categories as $item) {
-            $cat_names[$item->id] = $item->name;
+            $catfullname = $item->name;
+            // check if category has parent
+            if ($item->depth == 2) {
+                $parents = explode("/", $item->path);
+                $id = $parents[count($parents) - 2]; 
+                $temp = $DB->get_record('course_categories', ['id' => $id]);
+                $catfullname = $temp->name . ' -> ' . $catfullname;
+            }
+            $cat_names[$item->id] = $catfullname;
         }
 
         $mform->addElement('select', 'category', get_string('lb_choose_category', 'report_modstats'), $cat_names);

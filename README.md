@@ -7,6 +7,7 @@ Hence, we developed "Modules Usage Statistics"; this is a Moodle report plugin t
 
 ## Releases
 
+- v3.2: this version presents category parent name and amount of used courses.
 - v3.1: this version presents some fixes for compatibility issues.
 - v3.0: this version presents the modules' names.
 - v2.0: this version presents modules usage statistics in a graphical way.

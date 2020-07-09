@@ -24,6 +24,7 @@ $string['pluginname'] = 'Module Usage Statistics';
 $string['lb_choose_category'] = 'Please, choose a category';
 $string['lb_module_name'] = 'Module';
 $string['lb_module_usage'] = 'Usage (%)';
+$string['lb_module_courses_amount'] = 'Courses amount';
 $string['lb_all_categories'] = 'All categories';
 $string['lb_course'] = 'Courses using the module: ';
 $string['lb_chart_serie'] = 'Modules usage statistics';
